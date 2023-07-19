@@ -7,9 +7,10 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="Triangle Information"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+
 
 </Shell>
 
