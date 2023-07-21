@@ -1,23 +1,36 @@
-﻿using CommunityToolkit.Maui.Alerts;
+﻿/**
+ * Author: Tim Cottrell
+ * Project: Caselle Interview - Coding Problem
+ */
+
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Maui.Core;
-using Microsoft.Maui.Controls.Shapes;
 
 namespace Triangle;
 
+/**
+ * Class that represents the Model behind the XAML page (View)
+ */
 public partial class MainPage : ContentPage
 {
+
+    // Fields to store entry values
     double entryA = 0;
     double entryB = 0;
     double entryC = 0;
 
-    public string someString = "";
-
+    /**
+     * Main Page Constructor
+     */
     public MainPage()
 	{
         AppShell.SetNavBarIsVisible(this, false);
         InitializeComponent();
     }
 
+    /**
+     * Event handler to capture side A entry values if they are valid
+     */
     private void EntryA_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         //Get side as int if populated
@@ -25,6 +38,9 @@ public partial class MainPage : ContentPage
         _ = AttemptTriangleAsync();
     }
 
+    /**
+     * Event handler to capture side B entry values if they are valid
+     */
     private void EntryB_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         //Get side as int if populated
@@ -32,6 +48,9 @@ public partial class MainPage : ContentPage
         _ = AttemptTriangleAsync();
     }
 
+    /**
+     * Event handler to capture side C entry values if they are valid
+     */
     private void EntryC_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         //Get side as int if populated
@@ -39,6 +58,9 @@ public partial class MainPage : ContentPage
         _ = AttemptTriangleAsync();
     }
 
+    /**
+     * Method to attempt to make a triangle using the three sides 
+     */
     private async Task AttemptTriangleAsync()
     {
         ValidationMessage.Text = "";
@@ -56,7 +78,6 @@ public partial class MainPage : ContentPage
             // Checks for positive numbers
             if ((entryA == 0 && EntryA.IsFocused == false) || (entryB == 0 && EntryB.IsFocused == false) || (entryC == 0 && EntryC.IsFocused == false))
             {
-                //ValidationMessage.Text = "";
                 string toastText = "Please add a positive number for each side of the triangle";
                 var toast = Toast.Make(toastText, duration, fontSize);
                 await toast.Show(cancellationTokenSource.Token);
@@ -67,10 +88,10 @@ public partial class MainPage : ContentPage
                 string toastText = "This is not a valid triangle, please use appropriate lengths";
                 var toast = Toast.Make(toastText, duration, fontSize);
                 await toast.Show(cancellationTokenSource.Token);
-                //ValidationMessage.Text = "";
             }
             else
             {
+                // Build triangle and show triangle info
                 Triangle triangle = new Triangle(entryA,entryB,entryC);
                 ValidationMessage.Text = $"This is a valid {triangle.typeByAngles} {triangle.typeBySides} triangle";
 
@@ -78,24 +99,7 @@ public partial class MainPage : ContentPage
                 AngleBType.Text = $"{String.Format("{0:0.##}", triangle.angleB)}°";
                 AngleCType.Text = $"{String.Format("{0:0.##}", triangle.angleC)}°";
 
-                Binding pointABinding = new Binding();
-                pointABinding.Source = triangle;
-                pointABinding.Path = "pointA";
-                pointA.SetBinding(PathFigure.StartPointProperty, pointABinding);
-
-                Binding pointBBinding = new Binding();
-                pointBBinding.Source = triangle;
-                pointBBinding.Path = "pointB";
-                pointB.SetBinding(LineSegment.PointProperty, pointBBinding);
-
-                Binding pointCBinding = new Binding();
-                pointCBinding.Source = triangle;
-                pointCBinding.Path = "pointC";
-                pointC.SetBinding(LineSegment.PointProperty, pointCBinding);
-
-                pointA.StartPoint = triangle.pointA;
-                pointB.Point = triangle.pointB;
-                pointC.Point = triangle.pointC;
+                //TODO: If there is time implement Dynamic Triangle Drawing
             }
         }
     }

@@ -1,4 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--Author: Tim Cottrell
+Project: Caselle Interview - Coding Problem-->
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Triangle.MainPage"
@@ -190,32 +192,12 @@
                          Scale="1.25"
                             TextColor="LightSeaGreen"
                         ToolTipProperties.Text="Enter 3 side lengths to make a valid triangle. A message will appear which will classify the triangle."/>
-                    <Path Stroke="Black"      
-                      Aspect="Uniform"
-                      HorizontalOptions="Start">
-                        <Path.Data>
-                            <PathGeometry>
-                                <PathGeometry.Figures>
-                                    <PathFigureCollection>
-                                        <PathFigure IsClosed="True"
-                                x:Name="pointA">
-                                            <PathFigure.Segments>
-                                                <PathSegmentCollection>
-                                                    <LineSegment x:Name="pointB" />
-                                                    <LineSegment x:Name="pointC" />
-                                                </PathSegmentCollection>
-                                            </PathFigure.Segments>
-                                        </PathFigure>
-                                    </PathFigureCollection>
-                                </PathGeometry.Figures>
-                            </PathGeometry>
-                        </Path.Data>
-                    </Path>
+
+                    <!--TODO: If there is time implement Dynamic Triangle Drawing-->
 
                 </VerticalStackLayout>
 
             </Grid>
-
             <Image Grid.Column="1" Source="triangle.gif" IsAnimationPlaying="True" Aspect="AspectFill"/>
         </Grid>
     </ScrollView>
